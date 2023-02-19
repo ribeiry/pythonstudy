@@ -53,3 +53,21 @@ def update_package(id: str, request: Request, encomenda: EncomendaUpdate):
         return existing_package
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Package with {id} not found")
+
+
+@router.get ("/building/{condominio}", response_description= "List all packages of the build", response_model = List[Encomenda])
+def list_packages_build(condominio:str,request: Request):
+    logger.info("Condominio Name:" + condominio)
+    if(encomenda := list(request.app.database["encomenda"].find({"condominio": condominio}))) is not None:
+        logger.info('routes.py.list_packages_build')
+        return encomenda
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail =f"Package with Condominio {condominio} not found")
+
+@router.get ("/building/{condominio}/apto/{apto}", response_description= "List all packages of the build", response_model = List[Encomenda])
+def list_packages_build_apartment(condominio:str,apto:str,request: Request):
+    logger.info("Condominio Name:" + condominio)
+    logger.info("Apto:" + apto)
+    if(encomenda := list(request.app.database["encomenda"].find({"condominio": condominio, "apto": apto}))) is not None:
+        logger.info('routes.py.list_packages_build_apartament')
+        return encomenda
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail =f"Package with Condominio {condominio} not found")
