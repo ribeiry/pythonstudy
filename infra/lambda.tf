@@ -1,6 +1,6 @@
 data "archive_file" "zip" {
   type        = "zip"
-  source_dir  = "../python/"
+  source_dir  = "../python"
   output_path = "../python/package-management.zip"
 }
 
