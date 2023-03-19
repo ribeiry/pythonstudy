@@ -1,13 +1,13 @@
 from fastapi import FastAPI
-from dotenv import dotenv_values
-from pymongo import MongoClient
 from routes import router as book_router
 from mangum import Mangum
 import logging
+from dotenv import dotenv_values
+from pymongo import MongoClient
+import logging
+
 
 config= dotenv_values(".env")
-#DB_URI="mongodb+srv://augusto:Sh1zXYr4xHlrYfWD@cluster0.pqtfchv.mongodb.net/?retryWrites=true&w=majority"
-#DB_NAME="Cluster0"
 
 #SetUp loggers
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)

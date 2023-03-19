@@ -1,21 +1,20 @@
 from fastapi.testclient import TestClient
-from fastapi import FastAPI
+from python.app.main import app
 
-app = FastAPI()
 client = TestClient(app)
 
 
-def root_test():
+def test_root():
     """
         Test an endpoint root of package manager
     """
-    resp = client.get(url="/")
-
+    resp = client.get("/")
+    var = "../main.py"
     assert resp.status_code == 200
     assert resp.json() == {"message":"Welcome  manage package !"}
 
 
-def package_test():
+def test_package():
     """
         Test an endpoint create of package manager
     """
